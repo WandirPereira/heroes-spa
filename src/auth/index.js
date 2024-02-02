@@ -1,3 +1,3 @@
 export * from "./pages/";
-export * from "./componentes/";
-export * from "./hooks/";
+// export * from "./componentes/";
+// export * from "./hooks/";

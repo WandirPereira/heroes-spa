@@ -1,13 +1,31 @@
+import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../auth/context";
+import { types } from "../../auth/types/types";
 
-export const Navbar = (props) => {
+export const Navbar = ({ props }) => {
+  const { user, logout } = useContext(AuthContext);
+  // console.log("navbar user:", user);
   const navigate = useNavigate();
 
   const onLogout = () => {
+    logout();
     navigate("/login", {
       replace: true,
     });
   };
+
+  // const onLogout = () => {
+  //   const action = {
+  //     type: types.logout,
+  //     payload: {},
+  //   };
+  //   authDispatch(action);
+
+  //   navigate("/login", {
+  //     replace: true,
+  //   });
+  // };
 
   // console.log(props);
 
@@ -67,8 +85,12 @@ export const Navbar = (props) => {
             Logout
           </NavLink> */}
 
-          <span className="nav-item nav-link text-primary">Wandir</span>
+          <span className="nav-item nav-link text-primary">
+            {/* {user ? user.name : ""} */}
+            {user?.name}
+          </span>
           <button className="nav-item nav-link btn" onClick={() => onLogout()}>
+            {/* <button className="nav-item nav-link btn" onClick={() => logout()}> */}
             {/* Igual a: <button className="nav-item nav-link btn" onClick={onLogout}> */}
             Logout
           </button>

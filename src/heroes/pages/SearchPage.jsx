@@ -1,7 +1,12 @@
 import React from "react";
 import { HeroCard } from "../componentes";
 import { useForm } from "../../hooks/useForm";
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import queryString from "query-string";
 import { getHeroByName } from "../helpers";
 
@@ -11,8 +16,12 @@ export const SearchPage = () => {
 
   // const query = queryString.parse(location.search);
   const { q = "" } = queryString.parse(location.search);
+
+  // console.log("q1 = ", q1);
+
   const heroes = getHeroByName(q);
 
+  // console.log("heroes: ", heroes);
   const showSearch = q.length === 0;
   const showError = q.length > 0 && heroes.length === 0;
 

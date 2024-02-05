@@ -7,15 +7,47 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Navbar } from "../ui";
 import { HeroesRoutes } from "../heroes";
 import { LoginPage } from "../auth";
+import { PrivateRoute } from "./PrivateRoute";
+import { PublicRoute } from "./PublicRoute";
 
 export const AppRouter = () => {
   return (
     <>
       {/* <Navbar /> */}
       <Routes>
-        <Route path="login" element={<LoginPage />} />
+        {/* <Route path="login" element={<LoginPage />} /> */}
 
-        <Route path="/*" element={<HeroesRoutes />} />
+        {/* Rotas Públicas */}
+        {/* <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        /> */}
+
+        <Route
+          path="login/*"
+          element={
+            <PublicRoute>
+              <Routes>
+                <Route path="/*" element={<LoginPage />} />
+              </Routes>
+            </PublicRoute>
+          }
+        />
+
+        {/* Rotas Privadas */}
+        <Route
+          path="/*"
+          element={
+            <PrivateRoute>
+              <HeroesRoutes />
+            </PrivateRoute>
+          }
+        />
+        {/* // <Route path="/*" element={<HeroesRoutes />} /> */}
       </Routes>
     </>
   );
